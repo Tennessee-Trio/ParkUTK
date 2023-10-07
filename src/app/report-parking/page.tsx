@@ -53,7 +53,6 @@ export default function ReportParking() {
   const findAll = async () => {
     const response = await fetch("/api/parking-spots");
     const body = await response.json();
-    console.log(body.payload[1].report);
   };
 
   const find = async (parkingGarage: string) => {
