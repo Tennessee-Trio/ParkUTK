@@ -84,8 +84,8 @@ export default function ReportParking() {
           onChange={handleRangeChange}
           className="text-black"
         >
-          {ranges.map((range) => {
-            return <option value={range}>{range}</option>;
+          {ranges.map((range, index) => {
+            return <option value={range} key={index}>{range}</option>;
           })}
         </select>
 

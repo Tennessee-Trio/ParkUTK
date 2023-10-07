@@ -11,7 +11,7 @@ export async function POST(request: Request) {
 
     reports.insertOne({
       parkingGarage: data.parkingGarage,
-      date: data.parkingGarage,
+      date: data.date,
       range: data.range,
     });
 
