@@ -52,7 +52,7 @@ export default function FindParking() {
           {data.map((recentResponse, index) => {
             const information = recentResponse.payload;
             const formattedTime = dayjs(information.date).format("h:mma");
-            const formattedDate = dayjs(information.date).format("DD/MM");
+            const formattedDate = dayjs(information.date).format("MM/DD");
             return (
               <Marker
                 position={[information.latitude, information.longitude]}
@@ -72,7 +72,7 @@ export default function FindParking() {
                     The most recent report is from {formattedTime} on{" "}
                     {formattedDate}.
                   </p>
-                  <p>There are {information.range} parking spots available.</p>
+                  <p className="text-[#3b82f6]">There are {information.range} parking spots available.</p>
                 </Popup>
               </Marker>
             );

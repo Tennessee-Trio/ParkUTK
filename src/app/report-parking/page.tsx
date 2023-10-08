@@ -68,6 +68,14 @@ export default function ReportParking() {
       body: JSON.stringify({ request }),
     });
   };
+  
+  // This function will be triggered when the headline is clicked
+  const headingClickedHandler = (
+    event: React.MouseEvent<HTMLHeadingElement>
+  ) => {
+    event.stopPropagation();
+    alert("Submitted. Thank you for contributing!");
+  };
 
   return (
     <main>
@@ -78,6 +86,7 @@ export default function ReportParking() {
       </h1>
 
       <div className="w-fit bg-[#FF8200] text-[#313e48] mx-8 px-4 py-2">
+        
         <form onSubmit={handleSubmit}>
           <select
             value={selectedParkingGarage}
@@ -91,6 +100,7 @@ export default function ReportParking() {
               );
             })}
           </select>
+    
 
           <select value={selectedRange} onChange={handleRangeChange}>
             {ranges.map((range, index) => {
@@ -102,7 +112,8 @@ export default function ReportParking() {
             })}
           </select>
 
-          <input className="mx-4" type="submit" />
+          <input className="mx-4" type="submit" onClick={headingClickedHandler}/>
+          
         </form>
 
         <h1>Current parking garage: {selectedParkingGarage}</h1>
