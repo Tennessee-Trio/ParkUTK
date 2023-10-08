@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
+import Link from "next/link";
 
 export default function FindParking() {
   const [data, setData] = useState(null);
@@ -41,11 +42,11 @@ export default function FindParking() {
     return (
       <>
         <hr className="h-2 bg-[#FF8200] border-0"></hr>
-        <h1 className="text-white bg-[#313e48] text-3xl px-8 py-2">Park UTK</h1>
+        <h1 className="text-white bg-[#313e48] text-3xl px-8 py-2 cursor-pointer"><Link href={"/"}>Park UTK</Link></h1>
         <MapContainer
           className="h-[calc(100vh-60px)]"
           center={[35.9572666073227, -83.92894490123355]}
-          zoom={16}
+          zoom={15}
           scrollWheelZoom={false}
         >
           {data.map((recentResponse, index) => {

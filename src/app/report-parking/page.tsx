@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 interface IndexableObject {
   [key: string]: any;
@@ -71,7 +72,7 @@ export default function ReportParking() {
   return (
     <main>
       <hr className="h-2 bg-[#FF8200] border-0"></hr>
-      <h1 className="text-white bg-[#313e48] text-3xl px-8 py-2">Park UTK</h1>
+      <h1 className="text-white bg-[#313e48] text-3xl px-8 py-2 cursor-pointer"><Link href={"/"}>Park UTK</Link></h1>
       <h1 className="br-white text-[#313e48] text-2xl px-8 py-2">
         Report Parking
       </h1>
