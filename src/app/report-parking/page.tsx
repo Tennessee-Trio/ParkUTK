@@ -101,7 +101,7 @@ export default function ReportParking() {
             })}
           </select>
 
-          <input className="mx-4" type="submit" />
+          <input className="mx-4 cursor-pointer" type="submit" />
         </form>
 
         <h1>Current parking garage: {selectedParkingGarage}</h1>
