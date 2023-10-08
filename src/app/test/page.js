@@ -3,13 +3,14 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
 
-export default function FindParking() {
-  const utkCoordinates = [-83.924662968, 35.950996196];
+export default function Test() {
+  // make center a variable that is exactly how we want it
+  // find lat longs
   return (
     <MapContainer
       className="h-[500px]"
-      center={[35.955, -83.926453]}
-      zoom={16}
+      center={[51.505, -0.09]}
+      zoom={12}
       scrollWheelZoom={false}
     >
       <TileLayer
