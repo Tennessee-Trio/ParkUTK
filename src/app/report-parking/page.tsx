@@ -9,47 +9,29 @@ interface IndexableObject {
 export default function ReportParking() {
   const parkingGarages = [
     "11th Street Garage (G13)",
-    "Administration Garage (G3/G4/G5)",
-    "Lake Avenue Garage (G11)",
-    "Locust Street Parking Garage",
-    "McClung Plaza Garage (G1/G2)",
     "Neyland Drive Garage (G10)",
-    "Pratt Pavilion (G14)",
     "Terrace Avenue Parking Garage (G17)",
-    "Volunteer Boulevard Parking Garage(G16)",
+    "Volunteer Boulevard Parking Garage (G16)",
     "Volunteer Hall (G15)",
-    "West Campus Parking Garage (G7)",
     "White Avenue Parking Garage (G12)",
   ];
 
   const parkingGarageLatitudes: IndexableObject = {
-    "11th Street Garage (G13)": 35.9591,
-    "Administration Garage (G3/G4/G5)": 0,
-    "Lake Avenue Garage (G11)": 0,
-    "Locust Street Parking Garage": 0,
-    "McClung Plaza Garage (G1/G2)": 0,
-    "Neyland Drive Garage (G10)": 35.95169,
-    "Pratt Pavilion (G14)": 0,
-    "Terrace Avenue Parking Garage (G17)": 0,
-    "Volunteer Boulevard Parking Garage(G16)": 0,
-    "Volunteer Hall (G15)": 0,
-    "West Campus Parking Garage (G7)": 0,
-    "White Avenue Parking Garage (G12)": 0,
+    "11th Street Garage (G13)": 35.95974721358193,
+    "Neyland Drive Garage (G10)": 35.95351904825186,
+    "Terrace Avenue Parking Garage (G17)": 35.95460811672249,
+    "Volunteer Boulevard Parking Garage (G16)": 35.951209287591126,
+    "Volunteer Hall (G15)": 35.95892034378138,
+    "White Avenue Parking Garage (G12)": 35.95797921826765,
   };
 
   const parkingGarageLongitudes: IndexableObject = {
-    "11th Street Garage (G13)": -83.92483,
-    "Administration Garage (G3/G4/G5)": 0,
-    "Lake Avenue Garage (G11)": 0,
-    "Locust Street Parking Garage": 0,
-    "McClung Plaza Garage (G1/G2)": 0,
-    "Neyland Drive Garage (G10)": -83.92544,
-    "Pratt Pavilion (G14)": 0,
-    "Terrace Avenue Parking Garage (G17)": 0,
-    "Volunteer Boulevard Parking Garage(G16)": 0,
-    "Volunteer Hall (G15)": 0,
-    "West Campus Parking Garage (G7)": 0,
-    "White Avenue Parking Garage (G12)": 0,
+    "11th Street Garage (G13)": -83.92529528555826,
+    "Neyland Drive Garage (G10)": -83.92393497849766,
+    "Terrace Avenue Parking Garage (G17)": -83.93379379139853,
+    "Volunteer Boulevard Parking Garage (G16)": -83.92979662787423,
+    "Volunteer Hall (G15)": -83.92984735786756,
+    "White Avenue Parking Garage (G12)": -83.93197406178757,
   };
 
   const ranges = ["0 - 5", "5 - 10", "10 - 20", "20 - 40", "40+"];
@@ -76,7 +58,7 @@ export default function ReportParking() {
       date: new Date().toISOString(),
       range: selectedRange,
       latitude: parkingGarageLatitudes[selectedParkingGarage],
-      parkingGarageLongitudes: parkingGarageLongitudes[selectedParkingGarage],
+      longitude: parkingGarageLongitudes[selectedParkingGarage],
     };
 
     fetch("/api/parking-spots", {
@@ -84,23 +66,6 @@ export default function ReportParking() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ request }),
     });
-  };
-
-  const findAll = async () => {
-    const response = await fetch("/api/parking-spots");
-    const body = await response.json();
-  };
-
-  const find = async (parkingGarage: string) => {
-    const response = await fetch(`/api/parking-spots?garage=${parkingGarage}`);
-    const body = await response.json();
-  };
-
-  const findMostRecent = async (parkingGarage: string) => {
-    const response = await fetch(
-      `/api/parking-spots?mostRecent=true&garage=${parkingGarage}`
-    );
-    const body = await response.json();
   };
 
   return (
@@ -141,20 +106,6 @@ export default function ReportParking() {
 
         <h1>Current parking garage: {selectedParkingGarage}</h1>
         <h1>Current range: {selectedRange}</h1>
-
-        <div>
-          <button onClick={findAll}>CLICK TO GET ALL REPORTS</button>
-        </div>
-        <div>
-          <button onClick={() => find(selectedParkingGarage)}>
-            FIND TO GET CURRENT GARAGE'S REPORTS
-          </button>
-        </div>
-        <div>
-          <button onClick={() => findMostRecent(selectedParkingGarage)}>
-            FIND TO GET CURRENT GARAGE'S MOST RECENT REPORT
-          </button>
-        </div>
       </div>
     </main>
   );
