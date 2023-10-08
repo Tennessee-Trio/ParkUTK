@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 interface IndexableObject {
   [key: string]: any;
@@ -67,16 +68,25 @@ export default function ReportParking() {
       body: JSON.stringify({ request }),
     });
   };
+  
+  // This function will be triggered when the headline is clicked
+  const headingClickedHandler = (
+    event: React.MouseEvent<HTMLHeadingElement>
+  ) => {
+    event.stopPropagation();
+    alert("Submitted. Thank you for contributing!");
+  };
 
   return (
     <main>
       <hr className="h-2 bg-[#FF8200] border-0"></hr>
-      <h1 className="text-white bg-[#313e48] text-3xl px-8 py-2">Park UTK</h1>
+      <h1 className="text-white bg-[#313e48] text-3xl px-8 py-2 cursor-pointer"><Link href={"/"}>Park UTK</Link></h1>
       <h1 className="br-white text-[#313e48] text-2xl px-8 py-2">
         Report Parking
       </h1>
 
       <div className="w-fit bg-[#FF8200] text-[#313e48] mx-8 px-4 py-2">
+        
         <form onSubmit={handleSubmit}>
           <select
             value={selectedParkingGarage}
@@ -90,6 +100,7 @@ export default function ReportParking() {
               );
             })}
           </select>
+    
 
           <select value={selectedRange} onChange={handleRangeChange}>
             {ranges.map((range, index) => {
@@ -101,7 +112,7 @@ export default function ReportParking() {
             })}
           </select>
 
-          <input className="mx-4 cursor-pointer" type="submit" />
+          <input className="mx-4 cursor-pointer" type="submit" onClick={headingClickedHandler} />
         </form>
 
         <h1>Current parking garage: {selectedParkingGarage}</h1>

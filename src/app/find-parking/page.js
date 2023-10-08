@@ -4,6 +4,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { Icon } from "leaflet";
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
+import Link from "next/link";
 
 export default function FindParking() {
   const [data, setData] = useState(null);
@@ -41,17 +42,17 @@ export default function FindParking() {
     return (
       <>
         <hr className="h-2 bg-[#FF8200] border-0"></hr>
-        <h1 className="text-white bg-[#313e48] text-3xl px-8 py-2">Park UTK</h1>
+        <h1 className="text-white bg-[#313e48] text-3xl px-8 py-2 cursor-pointer"><Link href={"/"}>Park UTK</Link></h1>
         <MapContainer
           className="h-[calc(100vh-60px)]"
           center={[35.9572666073227, -83.92894490123355]}
-          zoom={16}
+          zoom={15}
           scrollWheelZoom={false}
         >
           {data.map((recentResponse, index) => {
             const information = recentResponse.payload;
             const formattedTime = dayjs(information.date).format("h:mma");
-            const formattedDate = dayjs(information.date).format("DD/MM");
+            const formattedDate = dayjs(information.date).format("MM/DD");
             return (
               <Marker
                 position={[information.latitude, information.longitude]}
@@ -71,7 +72,7 @@ export default function FindParking() {
                     The most recent report is from {formattedTime} on{" "}
                     {formattedDate}.
                   </p>
-                  <p>There are {information.range} parking spots available.</p>
+                  <p className="text-[#3b82f6]">There are {information.range} parking spots available.</p>
                 </Popup>
               </Marker>
             );
