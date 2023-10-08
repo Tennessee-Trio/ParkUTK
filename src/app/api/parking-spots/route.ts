@@ -13,6 +13,8 @@ export async function POST(request: Request) {
       parkingGarage: data.parkingGarage,
       date: data.date,
       range: data.range,
+      latitude: data.latitude,
+      longitude: data.longitude,
     });
 
     return Response.json({ success: true, payload: data });
@@ -35,11 +37,17 @@ export async function GET(request: NextRequest) {
     const reports = db.collection("reports");
 
     const searchParams = request.nextUrl.searchParams;
-    const query = searchParams.get("garage");
+    const garageQuery = searchParams.get("garage");
+    const mostRecentQuery = searchParams.get("mostRecent");
 
     let response;
-    if (query) {
-      response = await reports.find({ parkingGarage: query }).toArray();
+    if (mostRecentQuery && garageQuery) {
+      response = await reports.findOne(
+        { parkingGarage: garageQuery },
+        { sort: { date: -1 } }
+      );
+    } else if (garageQuery) {
+      response = await reports.find({ parkingGarage: garageQuery }).toArray();
     } else {
       response = await reports.find().toArray();
     }
