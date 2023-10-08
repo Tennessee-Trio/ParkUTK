@@ -62,46 +62,51 @@ export default function ReportParking() {
 
   return (
     <main>
-      <h1>Report Parking</h1>
+      <hr className="h-2 bg-[#FF8200] border-0"></hr>
+      <h1 className="text-white bg-[#313e48] text-3xl px-8 py-2">Park UTK</h1>
+      <h1 className="br-white text-[#313e48] text-2xl px-8 py-2">
+        Report Parking
+      </h1>
 
-      <form onSubmit={handleSubmit}>
-        <select
-          value={selectedParkingGarage}
-          onChange={handleParkingGarageChange}
-          className="text-black"
-        >
-          {parkingGarages.map((garage, index) => {
-            return (
-              <option value={garage} key={index}>
-                {garage}
-              </option>
-            );
-          })}
-        </select>
+      <div className="w-fit bg-[#FF8200] text-[#313e48] mx-8 px-4 py-2">
+        <form onSubmit={handleSubmit}>
+          <select
+            value={selectedParkingGarage}
+            onChange={handleParkingGarageChange}
+          >
+            {parkingGarages.map((garage, index) => {
+              return (
+                <option value={garage} key={index}>
+                  {garage}
+                </option>
+              );
+            })}
+          </select>
 
-        <select
-          value={selectedRange}
-          onChange={handleRangeChange}
-          className="text-black"
-        >
-          {ranges.map((range, index) => {
-            return <option value={range} key={index}>{range}</option>;
-          })}
-        </select>
+          <select value={selectedRange} onChange={handleRangeChange}>
+            {ranges.map((range, index) => {
+              return (
+                <option value={range} key={index}>
+                  {range}
+                </option>
+              );
+            })}
+          </select>
 
-        <input type="submit" />
-      </form>
+          <input className="mx-4" type="submit" />
+        </form>
 
-      <h1>Current parking garage: {selectedParkingGarage}</h1>
-      <h1>Current range: {selectedRange}</h1>
+        <h1>Current parking garage: {selectedParkingGarage}</h1>
+        <h1>Current range: {selectedRange}</h1>
 
-      <div>
-        <button onClick={findAll}>CLICK TO GET ALL REPORTS</button>
-      </div>
-      <div>
-        <button onClick={() => find(selectedParkingGarage)}>
-          FIND TO GET CURRENT GARAGE'S REPORTS
-        </button>
+        <div>
+          <button onClick={findAll}>CLICK TO GET ALL REPORTS</button>
+        </div>
+        <div>
+          <button onClick={() => find(selectedParkingGarage)}>
+            FIND TO GET CURRENT GARAGE'S REPORTS
+          </button>
+        </div>
       </div>
     </main>
   );
